@@ -132,7 +132,7 @@ jobs:
         commit: main
         replacesArtifacts: true
         makeLatest: false
-        token: ${{ secrets.workflow_token }}
+        token: ${{ secrets.GITHUB_TOKEN }}
         bodyFile: ${{ env.build_dir }}/bodyFile
         artifacts: |
           ${{ env.build_dir }}/rom/*

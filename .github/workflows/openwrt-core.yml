@@ -88,12 +88,12 @@ jobs:
         tag: openwrt-25.12
         commit: main
         replacesArtifacts: true
-        token: ${{ secrets.workflow_token }}
+        token: ${{ secrets.GITHUB_TOKEN }}
         artifacts: |
           ${{ env.build_dir }}/openwrt/*-*.tar.gz
 
     - name: Sync kernel modules
-      uses: peter-evans/repository-dispatch@v3
+      uses: peter-evans/repository-dispatch@main
       with:
         token: ${{ secrets.workflow_token }}
         repository: sbwml/openwrt_core3
@@ -109,7 +109,7 @@ jobs:
         gh cache delete ${{ matrix.tag.version }}-${{ matrix.model }} || true
 
     - name: Save Cached
-      uses: actions/cache/save@v4
+      uses: actions/cache/save@main
       with:
         path: /builder/.ccache
         key: ${{ matrix.tag.version }}-${{ matrix.model }}
